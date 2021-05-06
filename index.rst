@@ -6,7 +6,12 @@ Tinker Manual
    :caption: Contents
 
    text/intro
+   text/install/index
+   text/ff/index
+   text/feat/index
    text/key/index
+   text/thanks
+   text/refs
 
 .. only:: html
 
