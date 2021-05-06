@@ -17,9 +17,12 @@
 
 # -- Project information -----------------------------------------------------
 
+import datetime
 project = 'Tinker Manual'
-copyright = '2021, Jay W. Ponder and Zhi Wang'
-author = 'Jay W. Ponder and Zhi Wang'
+author_html = 'Jay W. Ponder & Zhi Wang'
+author_latex = 'Jay W. Ponder \& Zhi Wang'
+copyright = '%s, %s' % (datetime.datetime.now().year, author_html)
+latex_documents = [('index', 'tinkermanual.tex', project, author_latex, 'manual')]
 
 
 # -- General configuration ---------------------------------------------------
@@ -46,6 +49,7 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 #
 html_theme = 'pydata_sphinx_theme'
 html_theme_options = {
+   'navbar_center': [],
    'github_url': 'https://github.com/tinkertools',
    'twitter_url': 'https://twitter.com/tinkertoolsmd'
 }
@@ -54,3 +58,29 @@ html_theme_options = {
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
+
+
+# -- Options for LaTex output ------------------------------------------------
+
+latex_elements = {
+   'papersize': 'letterpaper', # 'letterpaper' or 'a4paper'
+   'pointsize': '10pt',        # '10pt', '11pt' or '12pt'
+
+   'preamble': r'''
+% \usepackage[notextcomp]{kpfonts}
+\usepackage{fouriernc}
+\usepackage[defaultsans]{lato} % sans serif
+\usepackage{inconsolata}       % monospace
+
+% \usepackage{geometry} % already used
+\geometry{paperheight=9in,paperwidth=6in,top=1.0in,bottom=1.0in,left=0.5in,right=0.5in,heightrounded}
+''',
+
+   'sphinxsetup': r'''
+      TitleColor={rgb}{0,0,0},
+      InnerLinkColor={rgb}{0,0,0},
+      OuterLinkColor={rgb}{0,0,0},
+      VerbatimColor={rgb}{0.9,0.9,0.9},
+      VerbatimBorderColor={rgb}{1,1,1}
+'''
+}
