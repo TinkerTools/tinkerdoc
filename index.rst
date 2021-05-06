@@ -7,8 +7,8 @@ Tinker Manual
 
    text/intro
    text/install/index
-   text/ff/index
-   text/feat/index
+   text/forcefield/index
+   text/feature/index
    text/key/index
    text/thanks
    text/refs
