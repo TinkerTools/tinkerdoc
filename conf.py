@@ -79,6 +79,8 @@ latex_elements = {
 \usepackage[defaultsans]{lato} % sans serif
 \usepackage{inconsolata}       % monospace
 
+\usepackage[normalem]{ulem} % strikethrough text: \sout{text}
+
 % \usepackage{geometry} % already used
 \geometry{paperheight=9in,paperwidth=6in,top=1.0in,bottom=1.0in,left=0.5in,right=0.5in,heightrounded}
 ''',
