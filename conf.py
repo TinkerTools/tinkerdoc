@@ -68,6 +68,7 @@ html_static_path = ['_static']
 
 # -- Options for LaTex output ------------------------------------------------
 
+latex_logo = 'mechanic.png'
 latex_elements = {
    'papersize': 'letterpaper', # 'letterpaper' or 'a4paper'
    'pointsize': '10pt',        # '10pt', '11pt' or '12pt'
@@ -80,6 +81,30 @@ latex_elements = {
 
 % \usepackage{geometry} % already used
 \geometry{paperheight=9in,paperwidth=6in,top=1.0in,bottom=1.0in,left=0.5in,right=0.5in,heightrounded}
+''',
+
+   'maketitle': r'''
+\newcommand\sphinxbackoftitlepage{
+\vspace*{\fill}
+\begingroup
+Copyright © 1990-2021\\
+by Jay William Ponder\\
+ALL Rights Reserved\\
+\\
+\\
+Cover Illustration by Jay Nelson\\
+Courtesy of Prof. R. T. Paine, University of New Mexico\\
+\\
+\\
+TINKER IS PROVIDED "AS IS" AND WITHOUT ANY WARRANTY EXPRESS OR IMPLIED. THE USER ASSUMES ALL RISKS OF USING THIS SOFTWARE. THERE IS NO CLAIM OF THE MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.\\
+\\
+YOU MAY MAKE COPIES OF TINKER FOR YOUR OWN USE, AND MODIFY THOSE COPIES. YOU MAY NOT DISTRIBUTE ANY ORIGINAL OR MODIFIED SOURCE CODE, EXECUTABLES OR DOCUMENTATION TO USERS AT ANY SITE OTHER THAN YOUR OWN.\\
+\\
+PLEASE READ, SIGN AND RETURN THE TINKER LICENSE AGREEMENT IF YOU MAKE USE OF THIS SOFTWARE.
+\endgroup
+\vspace*{\fill}
+}
+\sphinxmaketitle
 ''',
 
    'sphinxsetup': r'''
