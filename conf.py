@@ -50,9 +50,14 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 #
 html_theme = 'pydata_sphinx_theme'
 html_theme_options = {
-   'navbar_center': [],
+   'use_edit_page_button': True,
    'github_url': 'https://github.com/tinkertools',
    'twitter_url': 'https://twitter.com/tinkertoolsmd'
+}
+html_context = {
+   'github_user': 'tinkertools',
+   'github_repo': 'tinkerdoc',
+   'github_version': 'master'
 }
 
 # Add any paths that contain custom static files (such as style sheets) here,
