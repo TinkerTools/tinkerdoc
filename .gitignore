@@ -1,2 +1,9 @@
 _build
 .vscode
+
+# LaTex
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.synctex.*

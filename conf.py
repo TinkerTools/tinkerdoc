@@ -24,6 +24,7 @@ author_latex = 'Jay W. Ponder \& Zhi Wang'
 copyright = '%s, %s' % (datetime.datetime.now().year, author_html)
 latex_documents = [('index', 'tinkermanual.tex', project, author_latex, 'manual')]
 
+numfig = True # number the figures
 
 # -- General configuration ---------------------------------------------------
 
