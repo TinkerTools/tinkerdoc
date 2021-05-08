@@ -89,7 +89,7 @@ latex_elements = {
 \newcommand\sphinxbackoftitlepage{
 \vspace*{\fill}
 \begingroup
-Copyright © 1990-2021\\
+Copyright © 1990--2021\\
 by Jay William Ponder\\
 ALL Rights Reserved\\
 \\
@@ -117,3 +117,12 @@ PLEASE READ, SIGN AND RETURN THE TINKER LICENSE AGREEMENT IF YOU MAKE USE OF THI
       VerbatimBorderColor={rgb}{1,1,1}
 '''
 }
+
+
+# -- Options for bibliography output -----------------------------------------
+
+extensions.append('sphinxcontrib.bibtex')
+bibtex_bibfiles = ['text/refs.bib']
+latex_elements['preamble'] = latex_elements['preamble'] + r'''
+\addto{\captionsenglish}{\renewcommand{\bibname}{References}}
+'''

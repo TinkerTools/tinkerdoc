@@ -116,13 +116,13 @@ whereas the way C.G. coded in Tinker is to solve the minimum of another target f
 
 The difference in two target functions is usually negligible unless other loose convergence methods are used to compute the induced dipoles.
 
-In the Thole damping model, a charge distribution :math:`\rho` is used as a replacement for the point dipole model. AMOEBA adopts the functional form
+In the Thole damping model, a charge distribution :math:`\rho` is used as a replacement for the point dipole model. AMOEBA adopts the second functional form
 
 .. math::
 
    \rho = \frac{3a}{4\pi}\exp(-au^3),
 
-where *u* is the polarizability-scaled distance. The electrostatic field and potential at distance *r* can be obtained from Gauss's law,
+from Ref. :cite:`Thole1981`, where *u* is the polarizability-scaled distance. The electrostatic field and potential at distance *r* can be obtained from Gauss's law,
 
 .. math::
 
@@ -152,11 +152,11 @@ Thus,
 
 .. math::
 
-   -\lambda_3/r^3 &= \phi'/r \Rightarrow        \\
-                  &\lambda_3 = 1 - \exp(-au^3), \\
-   3\lambda_5/r^5 &= (\phi''-\phi'/r)/r^2 \Rightarrow   \\
-                  &\lambda_5 = 1 - (1+au^3)\exp(-au^3), \\
-   -15\lambda_7/r^7 &= (\phi'''-3\phi''/r+3\phi'/r^2)/r^3 \Rightarrow                   \\
-                    &\lambda_7 = 1 - \left(1+au^3+\frac{3}{5}a^2 u^6\right)\exp(-au^3), \\
-   105\lambda_9/r^9 &= (\phi''''-6\phi'''/r+15\phi''/r^2-15\phi'/r^3)/r^4 \Rightarrow   \\
-                    &\lambda_9 = 1 - \left(1+au^3+\frac{18}{35}a^2 u^6+\frac{9}{35}a^3 u^9\right)\exp(-au^3).
+   -\lambda_3/r^3 &= \phi'/r \Rightarrow \\
+   \lambda_3 &= 1 - \exp(-au^3), \\
+   3\lambda_5/r^5 &= (\phi''-\phi'/r)/r^2 \Rightarrow \\
+   \lambda_5 &= 1 - (1+au^3)\exp(-au^3), \\
+   -15\lambda_7/r^7 &= (\phi'''-3\phi''/r+3\phi'/r^2)/r^3 \Rightarrow \\
+   \lambda_7 &= 1 - \left(1+au^3+\frac{3}{5}a^2 u^6\right)\exp(-au^3), \\
+   105\lambda_9/r^9 &= (\phi''''-6\phi'''/r+15\phi''/r^2-15\phi'/r^3)/r^4 \Rightarrow \\
+   \lambda_9 &= 1 - \left(1+au^3+\frac{18}{35}a^2 u^6+\frac{9}{35}a^3 u^9\right)\exp(-au^3).
