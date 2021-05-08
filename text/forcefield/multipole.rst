@@ -83,7 +83,7 @@ Distance
 
 .. math::
 
-   (r_x,r_y,r_z)=\boldsymbol{r}=r_2-r_1.
+   (r_x,r_y,r_z)=\mathbf{r}=r_2-r_1.
 
 Pairwise (atoms 1 and 2) multipole energy
 
