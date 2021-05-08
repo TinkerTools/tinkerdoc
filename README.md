@@ -7,6 +7,7 @@ Tinker Manual
 
 ## Create documentations on your local machine
 ```
+pip install pydata-sphinx-theme sphinxcontrib-bibtex
 make html
 make latexpdf
 ```
