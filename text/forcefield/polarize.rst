@@ -66,7 +66,7 @@ only if the convergence of :eq:`u-dipole2` is tight that :math:`\epsilon` and :m
 Conjugate Gradient
 ------------------
 
-Tinker uses the following Conjugate Gradient algorithm (C.G.) with a sparse matrix preconditioner (denoted as *M*) to obtain the induced dipoles. Related Tinker variables and routines are tabulated.
+Tinker uses the following Conjugate Gradient algorithm (C.G.) with a sparse matrix preconditioner :cite:`Wang2005` (denoted as *M*) to obtain the induced dipoles. Related Tinker variables and routines are tabulated.
 
 .. figure:: ../figure/cg.*
    :width: 300 px
