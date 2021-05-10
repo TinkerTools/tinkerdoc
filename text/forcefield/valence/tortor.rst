@@ -3,4 +3,4 @@
 Torsion-Torsion Coupling
 ========================
 
-text
+The potential energy is extrapolated from a predefined 2-D map with the :math:`(\phi,\psi)` angles.
