@@ -564,7 +564,7 @@ BONDTERM [NONE/ONLY]
 .. index:: BONDTYPE
 
 BONDTYPE [HARMONIC/MORSE]
-    Chooses the functional form of the bond stretching potential. The HARMONIC option selects a Taylor series expansion containing terms from harmonic through quartic. The MORSE option selects a Morse potential fit to the ideal bond length and stretching force constant parameter values. The default is to use the HARMONIC potential.
+   Chooses the functional form of the bond stretching potential. The HARMONIC option selects a Taylor series expansion containing terms from harmonic through quartic. The MORSE option selects a Morse potential fit to the ideal bond length and stretching force constant parameter values. The default is to use the HARMONIC potential.
 
 .. index:: BONDUNIT
 
