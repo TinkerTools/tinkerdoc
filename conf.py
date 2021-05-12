@@ -89,7 +89,7 @@ latex_elements = {
 \newcommand\sphinxbackoftitlepage{
 \vspace*{\fill}
 \begingroup
-Copyright © 1990--2021\\
+Copyright © 1990--\the\year{}\\
 by Jay William Ponder\\
 ALL Rights Reserved\\
 \\
