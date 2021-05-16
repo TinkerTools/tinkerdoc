@@ -6,7 +6,6 @@ chardet==4.0.0
 docutils==0.16
 idna==2.10
 imagesize==1.2.0
-install==1.3.4
 Jinja2==2.11.3
 latexcodec==2.0.1
 MarkupSafe==1.1.1
@@ -22,9 +21,9 @@ requests==2.25.1
 six==1.16.0
 snowballstemmer==2.1.0
 soupsieve==2.2.1
-Sphinx==3.5.4
+Sphinx==4.0.1
 sphinxcontrib-applehelp==1.0.2
-git+https://github.com/mcmtroffaes/sphinxcontrib-bibtex.git@60d41bf3fbed227f4bfb579206cfff99de4edd52
+sphinxcontrib-bibtex==2.2.1
 sphinxcontrib-devhelp==1.0.2
 sphinxcontrib-htmlhelp==1.0.3
 sphinxcontrib-jsmath==1.0.1
