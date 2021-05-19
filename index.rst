@@ -19,3 +19,8 @@ Tinker Manual
       :caption: Index
 
       genindex
+
+   .. toctree::
+      :caption: Download Citations
+
+      text/cite

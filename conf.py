@@ -65,6 +65,8 @@ html_context = {
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
 
+def setup(app):
+   app.add_js_file('citation.js') # under the "_static" directory
 
 # -- Options for LaTex output ------------------------------------------------
 
