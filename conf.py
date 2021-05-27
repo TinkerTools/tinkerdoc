@@ -76,8 +76,8 @@ latex_elements = {
    'pointsize': '10pt',        # '10pt', '11pt' or '12pt'
 
    'preamble': r'''
-% \usepackage[notextcomp]{kpfonts}
-\usepackage{fouriernc}
+\usepackage[notextcomp]{kpfonts}
+% \usepackage{fouriernc}
 \usepackage[defaultsans]{lato} % sans serif
 \usepackage{inconsolata}       % monospace
 
@@ -93,7 +93,7 @@ latex_elements = {
 \begingroup
 Copyright © 1990--\the\year{}\\
 by Jay William Ponder\\
-ALL Rights Reserved\\
+All Rights Reserved\\
 \\
 \\
 Cover Illustration by Jay Nelson\\
