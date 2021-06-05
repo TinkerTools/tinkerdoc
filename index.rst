@@ -21,6 +21,6 @@ Tinker Manual
       genindex
 
    .. toctree::
-      :caption: Download Citations
+      :caption: Citations
 
       text/cite
