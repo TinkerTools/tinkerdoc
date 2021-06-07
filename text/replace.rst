@@ -18,5 +18,7 @@
    :raw-latex:`\sout{\textsc{Tinker8}}`
 .. |not9| replace:: :raw-html:`<span style="text-decoration:line-through" style="font-variant:small-caps">Tinker9</span>`
    :raw-latex:`\sout{\textsc{Tinker9}}`
-.. |notHP| replace:: :raw-html:`<span style="text-decoration:line-through" style="font-variant:small-caps">TinkerHP</span>`
+.. |nothp| replace:: :raw-html:`<span style="text-decoration:line-through" style="font-variant:small-caps">TinkerHP</span>`
    :raw-latex:`\sout{\textsc{TinkerHP}}`
+.. |to9| replace:: :raw-html:`<span style="font-variant:small-caps">Apply to Tinker9</span>`
+   :raw-latex:`\textsc{Apply to Tinker9}`
