@@ -86,6 +86,15 @@ latex_elements = {
 
 \usepackage[normalem]{ulem} % strikethrough text: \sout{text}
 
+% text in a rounded box
+\usepackage{tcolorbox}
+\newtcbox{\TinkerIXBoxAvail}{on line,
+colback=green!5!white,colframe=green!75!black,
+boxrule=1pt,arc=4pt,boxsep=0pt,left=3pt,right=3pt,top=3pt,bottom=3pt}
+\newtcbox{\TinkerIXBoxUnavail}{on line,
+colback=red!5!white,colframe=red!75!black,
+boxrule=1pt,arc=4pt,boxsep=0pt,left=3pt,right=3pt,top=3pt,bottom=3pt}
+
 % \usepackage{geometry} % already used
 \geometry{paperheight=9in,paperwidth=6in,top=1.0in,bottom=1.0in,left=0.5in,right=0.5in,heightrounded}
 ''',

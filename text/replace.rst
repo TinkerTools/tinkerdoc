@@ -14,11 +14,15 @@
 .. role:: raw-html(raw)
    :format: html
 
-.. |not8| replace:: :raw-html:`<span style="text-decoration:line-through" style="font-variant:small-caps">Tinker8</span>`
-   :raw-latex:`\sout{\textsc{Tinker8}}`
-.. |not9| replace:: :raw-html:`<span style="text-decoration:line-through" style="font-variant:small-caps">Tinker9</span>`
-   :raw-latex:`\sout{\textsc{Tinker9}}`
-.. |nothp| replace:: :raw-html:`<span style="text-decoration:line-through" style="font-variant:small-caps">TinkerHP</span>`
-   :raw-latex:`\sout{\textsc{TinkerHP}}`
-.. |to9| replace:: :raw-html:`<span style="font-variant:small-caps">Apply to Tinker9</span>`
-   :raw-latex:`\textsc{Apply to Tinker9}`
+.. |not9| replace:: :raw-html:`<span style="text-decoration:line-through;background-color:Tomato;color:white">Tinker9</span>`
+   :raw-latex:`\TinkerIXBoxUnavail{\sout{\textsf{Tinker9}}}`
+.. |not8| replace:: :raw-html:`<span style="text-decoration:line-through;background-color:Tomato;color:white">Tinker</span>`
+   :raw-latex:`\TinkerIXBoxUnavail{\sout{\textsf{Tinker}}}`
+.. |nothp| replace:: :raw-html:`<span style="text-decoration:line-through;background-color:Tomato;color:white">Tinker-HP</span>`
+   :raw-latex:`\TinkerIXBoxUnavail{\sout{\textsf{Tinker-HP}}}`
+.. |doc9| replace:: :raw-html:`<span style="background-color:YellowGreen">Tinker9</span>`
+   :raw-latex:`\TinkerIXBoxAvail{\textsf{Tinker9}}`
+.. |doc8| replace:: :raw-html:`<span style="background-color:YellowGreen">Tinker</span>`
+   :raw-latex:`\TinkerIXBoxAvail{\textsf{Tinker}}`
+.. |dochp| replace:: :raw-html:`<span style="background-color:YellowGreen">Tinker-HP</span>`
+   :raw-latex:`\TinkerIXBoxAvail{\textsf{Tinker-HP}}`

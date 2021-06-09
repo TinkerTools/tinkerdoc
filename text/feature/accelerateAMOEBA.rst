@@ -3,7 +3,7 @@ Accelerating MD Simulation in Tinker9
 
 .. include:: ../replace.rst
 
-|to9|
+|doc9|
 
 Cutoff distances.
    In most cases, the AMOEBA force field will use both VDW and electrostatic potential energies. The latter term usually contains both permanent quadrupole and induced dipole energies and enables PME. The performance of Tinker9 is very sensitive to the cutoff distances of these nonbonded terms and is especially dominated by the cutoff distance of the electrostatics.
