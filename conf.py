@@ -65,6 +65,8 @@ html_context = {
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
 
+def setup(app):
+   app.add_js_file('citation.js') # under the "_static" directory
 
 # -- Options for LaTex output ------------------------------------------------
 
@@ -74,10 +76,13 @@ latex_elements = {
    'pointsize': '10pt',        # '10pt', '11pt' or '12pt'
 
    'preamble': r'''
-% \usepackage[notextcomp]{kpfonts}
-\usepackage{fouriernc}
+\usepackage[notextcomp]{kpfonts}
+% \usepackage{fouriernc}
 \usepackage[defaultsans]{lato} % sans serif
 \usepackage{inconsolata}       % monospace
+\usepackage[none]{hyphenat}    % turn off hyphenation
+\usepackage{enumitem}
+\setlist[description]{style=unboxed} % long description list
 
 \usepackage[normalem]{ulem} % strikethrough text: \sout{text}
 
@@ -89,9 +94,9 @@ latex_elements = {
 \newcommand\sphinxbackoftitlepage{
 \vspace*{\fill}
 \begingroup
-Copyright © 1990--2021\\
+Copyright © 1990--\the\year{}\\
 by Jay William Ponder\\
-ALL Rights Reserved\\
+All Rights Reserved\\
 \\
 \\
 Cover Illustration by Jay Nelson\\
