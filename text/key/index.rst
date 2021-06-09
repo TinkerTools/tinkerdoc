@@ -6,16 +6,20 @@ Using Keywords to Control Tinker Calculations
 
 This section contains detailed descriptions of the keyword parameters used to define or alter the course of a Tinker calculation. The keyword control file is optional in the sense that all of the Tinker programs will run in the absence of a keyfile and will simply use default values or query the user for needed information. However, the keywords allow use of a wide variety of algorithmic and procedural options, many of which are unavailable interactively.
 
-Keywords are read from the keyword control file. All programs look first for a keyfile with the same base name as the input molecular system and ending in the extension .key. If this file does not exist, then Tinker tries to use a generic keyfile with the name Tinker.key and located in the same directory as the input system. If neither a system-specific nor a generic keyfile is present, Tinker will continue by using default values for keyword options and asking interactive questions as necessary.
+Keywords are read from the keyword control file. All programs look first for a keyfile with the same base name as the input molecular system and ending in the extension .key. If this file does not exist, then Tinker tries to use a generic keyfile with the name tinker.key and located in the same directory as the input molecular system. The name of the keyfile can also be specified on the command line invoking a Tinker calculation with the "-k" flag. For example, the command:
 
-Tinker searches the keyfile during the course of a calculation for relevant keywords that may be present. All keywords must appear as the first word on the line. Any blank space to the left of the keyword is ignored, and all contents of the keyfiles are case insensitive. Some keywords take modifiers; i.e., Tinker looks further on the same line for additional information, such as the value of some parameter related to the keyword. Modifier information is read in free format, but must be completely contained on the same line as the original keyword. Any lines contained in the keyfile which do not qualify as valid keyword lines are treated as comments and are simply ignored.
+   analyze my-molecule -k my-keyfile
+
+will run the Tinker ANALYZE program taking as input the molecular system given in the file "my-molecule" or "my-molecule.xyz", and using a keyfile named either "my-keyfile" or "my-keyfile.key". If a keyfile is not located via any of the above mechanisms, Tinker will continue by using default values for keyword options and asking interactive questions as necessary.
+
+Tinker searches the keyfile during the course of a calculation for relevant keywords that may be present. All keywords must appear as the first word on the line. Any blank space to the left of the keyword is ignored, and all contents of the keyfiles are case insensitive. Some keywords take modifiers; i.e., Tinker looks further on the same line for additional information, such as the value of some parameter related to the keyword. Modifier information is read in free format, but must be completely contained on the same line as the original keyword. Any lines contained in the keyfile which do not qualify as valid keyword lines are treated as comments and are ignored.
 
 Several keywords take a list of integer values (atom numbers, for example) as modifiers. For these keywords the integers can simply be listed explicitly and separated by spaces, commas or tabs. If a range of numbers is desired, it can be specified by listing the negative of the first number of the range, followed by a separator and the last number of the range. For example, the keyword line ACTIVE 4 -9 17 23 could be used to add atoms 4, 9 through 17, and 23 to the set of active atoms during a Tinker calculation.
 
 Keywords Grouped by Functionality
 ---------------------------------
 
-Listed below are the available Tinker keywords sorted into groups by general function. The section ends with an alphabetical list containing each individual keyword, along with a brief description of its action, possible keyword modifiers, and usage examples.
+Listed below are the available Tinker keywords sorted into groups by general function. The following section provides an alphabetical list containing each keyword, along with a more detailed description of its action, possible keyword modifiers, and usage examples.
 
 OUTPUT CONTROL KEYWORDS
 ^^^^^^^^^^^^^^^^^^^^^^^
@@ -195,9 +199,10 @@ MATHEMATICAL ALGORITHM KEYWORDS
 
 FFT-PACKAGE	RANDOMSEED
 
-PARALLELIZATION KEYWORDS
-^^^^^^^^^^^^^^^^^^^^^^^^
+COMPUTER CONTROL KEYWORDS
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
+CUDA-DEVICE
 OPENMP-THREADS
 
 FREE ENERGY PERTURBATION KEYWORDS
@@ -223,23 +228,39 @@ RATTLE-ORIGIN	RATTLE-PLANE	RESTRAIN-ANGLE
 RESTRAIN-DISTANCE	RESTRAIN-GROUPS	RESTRAIN-POSITION
 RESTRAIN-TORSION	SPHERE	WALL
 
-PARAMETER FITTING KEYWORDS
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+ELECTROSTATIC POTENTIAL FITTING KEYWORDS
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-FIT-ANGLE	FIT-BOND	FIT-OPBEND
-FIT-STRBND	FIT-TORSION	FIT-UREY
-FIX-ANGLE	FIX-BOND	FIX-DIPOLE
-FIX-MONOPOLE	FIX-OPBEND	FIX-QUADRUPOLE
-FIX-STRBND	FIX-TORSION	FIX-UREY
+FIX-DIPOLE	FIX-MONOPOLE	FIX-QUADRUPOLE
 POTENTIAL-ATOMS	POTENTIAL-FIT	POTENTIAL-OFFSET
 POTENTIAL-SHELLS	POTENTIAL-SPACING	RESP-WEIGHT
 RESPTYPE	TARGET-DIPOLE	TARGET-QUADRUPOLE
 
+VALENCE PARAMETER FITTING KEYWORDS
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+FIT-ANGLE	FIT-BOND	FIT-OPBEND
+FIT-STRBND	FIT-TORSION	FIT-UREY
+FIX-ANGLE	FIX-BOND	FIX-OPBEND
+FIX-STRBND	FIX-TORSION	FIX-UREY
+
 POTENTIAL SMOOTHING KEYWORDS
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-DEFORM	DIFFUSE-CHARGE	DIFFUSE-TORSION
-DIFFUSE-VDW	SMOOTHING
+DEFORM
+   set the amount of diffusion equation-style smoothing
+
+DIFFUSE-CHARGE
+   diffusion coefficient applied to charge-charge potential
+
+DIFFUSE-TORSION
+   diffusion coefficient applied to torsion potential
+
+DIFFUSE-VDW
+   diffusion coefficient applied to van der Waals potential
+
+SMOOTHING
+   activate use of potential energy smoothing methods
 
 Description of Individual Keywords
 ----------------------------------
@@ -249,7 +270,7 @@ The following is an alphabetical list of the Tinker keywords along with a brief 
 .. index:: A-AXIS
 
 A-AXIS [real]
-   Sets the value of the a-axis length for a crystal unit cell, or, equivalently, the X-axis length for a periodic box. The length value in Angstroms is listed after the keyword. Equivalent to the X-AXIS keyword.
+   Sets the value of the a-axis length for a crystal unit cell, or, equivalently, the X-axis length for a periodic box. The length value in Angstroms is provided following the keyword. Equivalent to the X-AXIS keyword.
 
 .. index:: A-EXPTERM
 
@@ -278,7 +299,7 @@ ANGANG [1 integer & 3 reals]
 
 .. index:: ANGANGTERM
 
-ANGANGTERM [NONE/ONLY]
+ANGANGTERM [NONE / ONLY]
    Controls use of the angle-angle cross term potential energy. In the absence of a modifying option, this keyword turns on use of the potential. The NONE option turns off use of this potential energy term. The ONLY option turns off all potential energy terms except for this one.
 
 .. index:: ANGANGUNIT
@@ -343,7 +364,7 @@ ANGLEP [3 integers & 3 reals]
 
 .. index:: ANGLETERM
 
-ANGLETERM [NONE/ONLY]
+ANGLETERM [NONE / ONLY]
    Controls use of the bond angle bending potential energy term. In the absence of a modifying option, this keyword turns on use of the potential. The NONE option turns off use of this potential energy term. The ONLY option turns off all potential energy terms except for this one.
 
 .. index:: ANGLEUNIT
@@ -363,7 +384,7 @@ ANGTORS [4 integers & 6 reals]
 
 .. index:: ANGTORTERM
 
-ANGTORTERM [NONE/ONLY]
+ANGTORTERM [NONE / ONLY]
    Controls use of the angle bending-torsional angle cross term. In the absence of a modifying option, this keyword turns on use of the potential. The NONE option turns off use of this potential energy term. The ONLY option turns off all potential energy terms except for this one.
 
 .. index:: ANGTORUNIT
@@ -383,7 +404,7 @@ APBS-AGRID [3 reals]
 
 .. index:: APBS-BCFL
 
-APBS-BCFL [ZERO/SDH/MDH]
+APBS-BCFL [ZERO / SDH / MDH]
    Chooses the type of boundary conditions to be used when performing Poisson-Boltzmann calculations. The ZERO modifier denotes a zero potential at the boundary, while SDH and MDH are single and multiple Debye-Huckel conditions. The default setting in the absence of the BCFL keyword is to use the MDH boundary conditions.
 
 .. index:: APBS-CGCENT
@@ -443,7 +464,7 @@ APBS-PDIE [real]
 
 .. index:: APBS-RADII
 
-APBS-RADII [VDW/MACROMODEL/BONDI/TOMASI]
+APBS-RADII [VDW / MACROMODEL / BONDI / TOMASI]
    Specifies the atomic radii values to be used during APBS Poisson-Boltzmann calculations. The default in the absence o the APBS-RADII keyword is to use BONDI radii.
 
 .. index:: APBS-SDENS
@@ -468,7 +489,7 @@ APBS-SRAD [real]
 
 .. index:: APBS-SRMF
 
-APBS-SRFM [MOL/SMOL/SPL2/SPL4]
+APBS-SRFM [MOL / SMOL / SPL2 / SPL4]
    Specifies the model used to construct the dielectric and ion-accessibility coefficients during APBS Poisson-Boltzmann calculations. The MOL modifier sets the dielectric coefficient based on the molecular surface, while SMOL uses a smoothed molecular surface. The SPL2 and SPL4 models use a cubic spline surface and a 7th order polynomial, respectively. The default in the absence of the APBS-SRFM keyword is to use the SPL4 model.
 
 .. index:: APBS-SWIN
@@ -494,7 +515,7 @@ AUX-TEMP [real]
 .. index:: B-AXIS
 
 B-AXIS [real]
-   Sets the value of the b-axis length for a crystal unit cell, or, equivalently,  the Y-axis length for a periodic box. The length value in Angstroms is listed after the keyword. If the keyword is absent, the b-axis length is set equal to the a-axis length. Equivalent to the Y-AXIS keyword.
+   Sets the value of the b-axis length for a crystal unit cell, or, equivalently,  the Y-axis length for a periodic box. The length value in Angstroms is provided following the keyword. If the keyword is absent, the b-axis length is set equal to the a-axis length. Equivalent to the Y-AXIS keyword.
 
 .. index:: B-EXPTERM
 
@@ -503,8 +524,8 @@ B-EXPTERM [real]
 
 .. index:: BAROSTAT
 
-BAROSTAT [BERENDSEN]
-   Selects a barostat algorithm for use during molecular dynamics. At present only one modifier is available, a Berendsen bath coupling method. The default in the absence of the BAROSTAT keyword is to use the BERENDSEN algorithm.
+BAROSTAT [BERENDSEN / BUSSI / NOSE-HOOVER / MONTECARLO]
+   Selects a barostat algorithm for use during molecular dynamics. At present the options include three virial-based methods, in addition to a Monte Carlo barostat. The default in the absence of the BAROSTAT keyword is to use the BERENDSEN algorithm.
 
 .. index:: BASIN
 
@@ -558,13 +579,13 @@ BOND5 [2 integers & 2 reals]
 
 .. index:: BONDTERM
 
-BONDTERM [NONE/ONLY]
+BONDTERM [NONE / ONLY]
    Controls use of the bond stretching potential energy term. In the absence of a modifying option, this keyword turns on use of the potential. The NONE option turns off use of this potential energy term. The ONLY option turns off all potential energy terms except for this one.
 
 .. index:: BONDTYPE
 
-BONDTYPE [HARMONIC/MORSE]
-   Chooses the functional form of the bond stretching potential. The HARMONIC option selects a Taylor series expansion containing terms from harmonic through quartic. The MORSE option selects a Morse potential fit to the ideal bond length and stretching force constant parameter values. The default is to use the HARMONIC potential.
+BONDTYPE [HARMONIC / MORSE]
+    Chooses the functional form of the bond stretching potential. The HARMONIC option selects a Taylor series expansion containing terms from harmonic through quartic. The MORSE option selects a Morse potential fit to the ideal bond length and stretching force constant parameter values. The default is to use the HARMONIC potential.
 
 .. index:: BONDUNIT
 
@@ -573,13 +594,13 @@ BONDUNIT [real]
 
 .. index:: BORN-RADIUS
 
-BORN-RADIUS [ONION/STILL/HCT/OBC/ACE/GRYCUK/PERFECT]
+BORN-RADIUS [ONION / STILL / HCT / OBC / ACE / GRYCUK / PERFECT]
    Sets the algorithm used for computation of Born radii. The default behavior is to set BORN-RADIUS the same as the SOLVATE keyword, when possible. For Generalized Kirkwood models, the default value is set to GRYCUK.
 
 .. index:: C-AXIS
 
 C-AXIS [real]
-   Sets the value of the C-axis length for a crystal unit cell, or, equivalently, the Z-axis length for a periodic box. The length value in Angstroms is listed after the keyword. If the keyword is absent, the C-axis length is set equal to the A-axis length. Equivalent to the Z-AXIS keyword.
+   Sets the value of the C-axis length for a crystal unit cell, or, equivalently, the Z-axis length for a periodic box. The length value in Angstroms is provided following the keyword. If the keyword is absent, the C-axis length is set equal to the A-axis length. Equivalent to the Z-AXIS keyword.
 
 .. index:: C-EXPTERM
 
@@ -613,12 +634,12 @@ CHARGE-TAPER [real]
 
 .. index:: CHARGETERM
 
-CHARGETERM [NONE/ONLY]
+CHARGETERM [NONE / ONLY]
    Controls use of the charge-charge potential energy term between pairs of atomic partial charges. In the absence of a modifying option, this keyword turns on use of the potential. The NONE option turns off use of this potential energy term. The ONLY option turns off all potential energy terms except for this one.
 
 .. index:: CHARGETRANSFER
 
-CHARGETRANSFER [SEPARATE/COMBINED]
+CHARGETRANSFER [SEPARATE / COMBINED]
    Chooses the formulation used for the charge transfer potential energy function. The SEPARATE method includes separate terms for charge transfer in both directions between two atomic sites. The COMBINED model uses a single term to account for the total charge transfer interaction between two sites. The default value in the absence of the CHARGETRANSFER keyword is to use the SEPARATE expression to compute the charge transfer potential.
 
 .. index:: CHG-11-SCALE
@@ -653,7 +674,7 @@ CHG-BUFFER [real]
 
 .. index:: CHGDPLTERM
 
-CHGDPLTERM [NONE/ONLY]
+CHGDPLTERM [NONE / ONLY]
    Controls use of the charge-dipole potential energy term between atomic partial charges and bond dipoles. In the absence of a modifying option, this keyword turns on use of the potential. The NONE option turns off use of this potential energy term. The ONLY option turns off all potential energy terms except for this one.
 
 .. index:: CHGPEN
@@ -678,7 +699,7 @@ CHGTRN-TAPER [real]
 
 .. index:: CHGTRNTERM
 
-CHGTRNTERM [NONE/ONLY]
+CHGTRNTERM [NONE / ONLY]
    Controls use of the charge transfer potential energy term. In the absence of a modifying option, this keyword turns on use of the potential. The NONE option turns off use of this potential energy term. The ONLY option turns off all potential energy terms except for this one.
 
 .. index:: COLLISION
@@ -690,6 +711,11 @@ COLLISION [real]
 
 COMPRESS [real]
    Sets the value of the bulk solvent isothermal compressibility in 1/Atm for use during pressure computation and scaling in molecular dynamics computations. The default value used in the absence of the COMPRESS keyword is 0.000046, appropriate for water. This parameter serves as a scale factor for the Groningen-style pressure bath coupling time, and its exact value should not be of critical importance.
+
+.. index:: CUDA-DEVICE
+
+CUDA-DEVICE [integer]
+   Sets the device number of the NVIDIA GPU to be used for calculations with CUDA-enabled versions of Tinker, such as Tinker9, Tinker-OpenMM and Tinker-HP. The CUDA-capable devices are numbered internally by the system with consecutive integers, starting with 0 for the first device. An the absence of the CUDA-DEVICE keyword, most of the Tinker GPU programs will attempt to use the fastest GPU that is not currently performing a calculation.
 
 .. index:: CUTOFF
 
@@ -749,17 +775,17 @@ DIELECTRIC-OFFSET [real]
 .. index:: DIFFUSE-CHARGE
 
 DIFFUSE-CHARGE [real]
-   Used during potential function smoothing procedures to specify the effective diffusion coefficient to be applied to the smoothed form of the Coulomb's Law charge-charge potential function. In the absence of the DIFFUSE-CHARGE keyword, a default value of 3.5 is used.
+   Used during potential function smoothing procedures to specify the effective diffusion coefficient applied to the smoothed form of the Coulomb's Law charge-charge potential function. In the absence of the DIFFUSE-CHARGE keyword, a default value of 3.5 is used.
 
 .. index:: DIFFUSE-TORSION
 
 DIFFUSE-TORSION [real]
-   Used during potential function smoothing procedures to specify the effective diffusion coefficient to be applied to the smoothed form of the torsion angle potential function. In the absence of the DIFFUSE-TORSION keyword, a default value of 0.0225 is used.
+   Used during potential function smoothing procedures to specify the effective diffusion coefficient applied to the smoothed form of the torsion angle potential function. In the absence of the DIFFUSE-TORSION keyword, a default value of 0.0225 is used.
 
 .. index:: DIFFUSE-VDW
 
 DIFFUSE-VDW [real]
-   Used during potential function smoothing procedures to specify the effective diffusion coefficient to be applied to the smoothed Gaussian approximation to the Lennard-Jones van der Waals potential function. In the absence of the DIFFUSE-VDW keyword, a default value of 1.0 is used.
+   Used during potential function smoothing procedures to specify the effective diffusion coefficient applied to the smoothed Gaussian approximation to the Lennard-Jones van der Waals potential function. In the absence of the DIFFUSE-VDW keyword, a default value of 1.0 is used.
 
 .. index:: DIGITS
 
@@ -798,7 +824,7 @@ DIPOLE5 [2 integers & 2 reals]
 
 .. index:: DIPOLETERM
 
-DIPOLETERM [NONE/ONLY]
+DIPOLETERM [NONE / ONLY]
    Controls use of the dipole-dipole potential energy term between pairs of bond dipoles. In the absence of a modifying option, this keyword turns on use of the potential. The NONE option turns off use of this potential energy term. The ONLY option turns off all potential energy terms except for this one.
 
 .. index:: DIRECT-11-SCALE
@@ -868,7 +894,7 @@ DISPERSION [1 integer, 2 reals]
 
 .. index:: DISPERSIONTERM
 
-DISPERSIONTERM [NONE/ONLY]
+DISPERSIONTERM [NONE / ONLY]
    Controls use of the pairwise dispersion potential energy term between pairs of atoms. In the absence of a modifying option, this keyword turns on use of the potential. The NONE option turns off use of this potential energy term. The ONLY option turns off all potential energy terms except for this one.
 
 .. index:: DIVERGE
@@ -918,8 +944,8 @@ ENFORCE-CHIRALITY
 
 .. index:: EPSILONRULE
 
-EPSILONRULE [GEOMETRIC/ARITHMETIC/HARMONIC/HHG]
-   Selects the combining rule used to derive the ? value for van der Waals interactions. The default in the absence of the EPSILONRULE keyword is to use the GEOMETRIC mean of the individual epsilon values of the two atoms involved in the van der Waals interaction.
+EPSILONRULE [GEOMETRIC / ARITHMETIC / HARMONIC / HHG / W-H]
+   Selects the combining rule used to derive the epsilon value for van der Waals interactions. The default in the absence of the EPSILONRULE keyword is to use the GEOMETRIC mean of the individual epsilon values of the two atoms involved in the van der Waals interaction.
 
 .. index:: EWALD
 
@@ -948,7 +974,7 @@ EXIT-PAUSE
 
 .. index:: EXTRATERM
 
-EXTRATERM [NONE/ONLY]
+EXTRATERM [NONE / ONLY]
    Controls use of the user defined extra potential energy term. In the absence of a modifying option, this keyword turns on use of the potential. The NONE option turns off use of this potential energy term. The ONLY option turns off all potential energy terms except for this one.
 
 .. index:: FCTMIN
@@ -958,36 +984,69 @@ FCTMIN [real]
 
 .. index:: FFT-PACKAGE
 
-FFT-PACKAGE [FFTPACK/FFTW]
+FFT-PACKAGE [FFTPACK / FFTW]
    Specifies the fast Fourier transform package to be used in reciprocal space calculations as part of particle mesh Ewald summation. The default in the absence of the FFT-PACKAGE keyword is to use FFTPACK for serial, single-threaded calculations, and FFTW for OpenMP parallel calculations using multiple threads.
+
+.. index:: FIT-ANGLE
 
 FIT-ANGLE
 
+.. index:: FIT-BOND
+
 FIT-BOND
+
+.. index:: FIT-OPBEND
 
 FIT-OPBEND
 
+.. index:: FIT-STRBND
+
 FIT-STRBND
+
+.. index:: FIT-TORSION
 
 FIT-TORSION
 
+.. index:: FIT-UREY
+
 FIT-UREY
 
-FIX-ANGLE
+.. index:: FIX-ANGLE
+
+FIX-ANGLE   ,
+
+.. index:: FIX-BOND
 
 FIX-BOND
 
-FIX-DIPOLE
+.. index:: FIX-DIPOLE
 
-FIX-MONOPOLE   
+FIX-DIPOLE
+   Causes the individual dipole components of atomic multipole parameters to be held fixed at their input values during the fitting of an electrostatic model to target values of the electrostatic potential on a grid of points surrounding an input system of interest. In the absence of the FIX-DIPOLE keyword, dipole values are allowed to vary during the fitting procedure.
+
+.. index:: FIX-MONOPOLE
+
+FIX-MONOPOLE
+   Causes the individual monopole components of atomic multipole parameters to be held fixed at their input values during the fitting of an electrostatic model to target values of the electrostatic potential on a grid of points surrounding an input system of interest. In the absence of the FIX-MULTIPOLE keyword, monopole values are allowed to vary during the fitting procedure.
+
+.. index:: FIX-OPBEND
 
 FIX-OPBEND
 
+.. index:: FIX-QUADRUPOLE
+
 FIX-QUADRUPOLE
+   Causes the individual quadrupole components of atomic multipole parameters to be held fixed at their input values during the fitting of an electrostatic model to target values of the electrostatic potential on a grid of points surrounding an input system of interest. In the absence of the FIX-QUADRUPOLE keyword, quadrupole values are allowed to vary during the fitting procedure.
+
+.. index:: FIX-STRBND
 
 FIX-STRBND
 
+.. index:: FIX-TORSION
+
 FIX-TORSION
+
+.. index:: FIX-UREY
 
 FIX-UREY
 
@@ -1023,12 +1082,18 @@ GAMMAMIN [real]
 
 .. index:: GAUSSTYPE
 
-GAUSSTYPE [LJ-2/LJ-4/MM2-2/MM3-2/IN-PLACE]
+GAUSSTYPE [LJ-2 / LJ-4 / MM2-2 / MM3-2 / IN-PLACE]
    Specifies the underlying vdw form that a Gaussian vdw approximation will attempt to fit as the number of terms to be used in a Gaussian approximation of the Lennard-Jones van der Waals potential. The text modifier gives the name of the functional form to be used. Thus LJ-2 as a modifier will result in a 2-Gaussian fit to a Lennard-Jones vdw potential. The GAUSSTYPE keyword only takes effect when VDWTYPE is set to GAUSSIAN. This keyword has no default value.
+
+.. index:: GK-RADIUS
 
 GK-RADIUS
 
+.. index:: GKC
+
 GKC
+
+.. index:: GKR
 
 GKR
 
@@ -1077,6 +1142,8 @@ HESSIAN-CUTOFF [real]
 HGUESS [real]
    Sets an initial guess for the average value of the diagonal elements of the scaled inverse Hessian matrix used by the optimally conditioned variable metric optimization routine. A default value of 0.4 is used in the absence of the HGUESS keyword.
 
+.. index:: IEL-SCF
+
 IEL-SCF
 
 .. index:: IMPROPER
@@ -1086,7 +1153,7 @@ IMPROPER [4 integers & 2 reals]
 
 .. index:: IMPROPTERM
 
-IMPROPTERM [NONE/ONLY]
+IMPROPTERM [NONE / ONLY]
    Controls use of the CHARMM-style improper dihedral angle potential energy term. In the absence of a modifying option, this keyword turns on use of the potential. The NONE option turns off use of this potential energy term. The ONLY option turns off all potential energy terms except for this one.
 
 .. index:: IMPROPUNIT
@@ -1101,7 +1168,7 @@ IMPTORS [4 integers & up to 3 real/real/integer triples]
 
 .. index:: IMPTORSTERM
 
-IMPTORSTERM [NONE/ONLY]
+IMPTORSTERM [NONE / ONLY]
    Controls use of the AMBER-style improper torsional angle potential energy term. In the absence of a modifying option, this keyword turns on use of the potential. The NONE option turns off use of this potential energy term. The ONLY option turns off all potential energy terms except for this one.
 
 .. index:: IMPTORSUNIT
@@ -1114,18 +1181,26 @@ IMPTORSUNIT [real]
 INACTIVE [integer list]
    Sets the list of inactive atoms during a Tinker computation. Individual potential energy terms are not computed when all atoms involved in the term are inactive. For Cartesian space calculations, inactive atoms are not allowed to move. For torsional space calculations, rotations are not allowed when there are inactive atoms on both sides of the rotated bond. Multiple INACTIVE lines can be present in the keyfile, and on each line the keyword can be followed by one or more atom numbers or ranges. If any INACTIVE keys are found, all atoms are set to active except those listed on the INACTIVE lines. The ACTIVE keyword overrides all INACTIVE keywords found in the keyfile.
 
+.. index:: INDUCE-12-SCALE
+
 INDUCE-12-SCALE
+
+.. index:: INDUCE-13-SCALE
 
 INDUCE-13-SCALE
 
+.. index:: INDUCE-14-SCALE
+
 INDUCE-14-SCALE
+
+.. index:: INDUCE-15-SCALE
 
 INDUCE-15-SCALE
 
 .. index:: INTEGRATOR
 
-INTEGRATOR [VERLET/BEEMAN/STOCHASTIC/RIGIDBODY]
-   Chooses the integration method for propagation of dynamics trajectories. The keyword is followed on the same line by the name of the option. Standard Newtonian MD can be run using either VERLET for the Velocity Verlet method, or BEEMAN for the velocity form of Bernie Brook's "Better Beeman" method. A Velocity Verlet-based stochastic dynamics trajectory is selected by the STOCHASTIC modifier. A rigid-body dynamics method is selected by the RIGIDBODY modifier. The default integration scheme is MD using the BEEMAN method.
+INTEGRATOR [VERLET / BEEMAN / RESPA / BAOAB / NOSE-HOOVER / BUSSI / GHMC / STOCHASTIC / RIGIDBODY]
+   Chooses the integration method for propagation of dynamics trajectories. The keyword is followed on the same line by the name of the option. The VERLET modifier specifies the Velocity Verlet method. BEEMAN is the velocity form of Bernie Brook's "Better Beeman" method. RESPA is a two-stage multiple time step integrator that splits bonded and nonbonded interactions. Both NOSE-HOOVER and BUSSI select integrators coupled to a thermostat and barostat of the same name. STOCHASTIC is a Velocity Verlet-based stochastic dynamics method. RIGIDBODY is an Euler angle-based rigid-body dynamics method. The default integration scheme for molecular dynamics is to use the BEEMAN method.
 
 .. index:: INTMAX
 
@@ -1141,6 +1216,8 @@ LAMBDA [real]
 
 LBFGS-VECTORS [integer]
    Sets the number of correction vectors used by the limited-memory L-BFGS optimization routine. The current maximum allowable value, and the default in the absence of the LBFGS-VECTORS keyword is 15.
+
+.. index:: LIGAND
 
 LIGAND
 
@@ -1166,36 +1243,66 @@ METAL [integer]
 
 .. index:: METALTERM
 
-METALTERM [NONE/ONLY]
+METALTERM [NONE / ONLY]
    Controls use of the transition metal ligand field potential energy term. In the absence of a modifying option, this keyword turns on use of the potential. The NONE option turns off use of this potential energy term. The ONLY option turns off all potential energy terms except for this one.
+
+.. index:: MMFF-PIBOND
 
 MMFF-PIBOND
 
+.. index:: MMFFANGLE
+
 MMFFANGLE
+
+.. index:: MMFFAROM
 
 MMFFAROM
 
+.. index:: MMFFBCI
+
 MMFFBCI
+
+.. index:: MMFFBOND
 
 MMFFBOND
 
+.. index:: MMFFBONDER
+
 MMFFBONDER
+
+.. index:: MMFFCOVRAD
 
 MMFFCOVRAD
 
+.. index:: MMFFDEFSTBN
+
 MMFFDEFSTBN
+
+.. index:: MMFFEQUIV
 
 MMFFEQUIV
 
+.. index:: MMFFOPBEND
+
 MMFFOPBEND
+
+.. index:: MMFFPBCI
 
 MMFFPBCI
 
+.. index:: MMFFPROP
+
 MMFFPROP
+
+.. index:: MMFFSTRBND
 
 MMFFSTRBND
 
+.. index:: MMFFTORSION
+
 MMFFTORSION
+
+.. index:: MMFFVDW
 
 MMFFVDW
 
@@ -1241,7 +1348,7 @@ MULTIPOLE [5 lines with: 3 or 4 integers & 1 real; 3 reals; 1 real; 2 reals; 3 r
 
 .. index:: MULTIPOLETERM
 
-MULTIPOLETERM [NONE/ONLY]
+MULTIPOLETERM [NONE / ONLY]
    Controls use of the atomic multipole electrostatics potential energy term. In the absence of a modifying option, this keyword turns on use of the potential. The NONE option turns off use of this potential energy term. The ONLY option turns off all potential energy terms except for this one.
 
 .. index:: MUTATE
@@ -1341,12 +1448,12 @@ OPBEND-SEXTIC [real]
 
 .. index:: OPBENDTERM
 
-OPBENDTERM [NONE/ONLY]
+OPBENDTERM [NONE / ONLY]
    Controls use of the out-of-plane bending potential energy term. In the absence of a modifying option, this keyword turns on use of the potential. The NONE option turns off use of this potential energy term. The ONLY option turns off all potential energy terms except for this one.
 
 .. index:: OPBENDTYPE
 
-OPBENDTYPE [W-D-C/Allinger]
+OPBENDTYPE [W-D-C / Allinger]
    Sets the type of angle to be used in the out-of-plane bending potential energy term. The choices are to use the Wilson-Decius-Cross (W-D-C) formulation from vibrational spectroscopy, or the Allinger angle from the MM2/MM3 force fields. The default value in the absence of the OPBENDTYPE keyword is to use the W-D-C angle.
 
 .. index:: OPBENDUNIT
@@ -1381,7 +1488,7 @@ OPDIST-SEXTIC [real]
 
 .. index:: OPDISTTERM
 
-OPDISTTERM [NONE/ONLY]
+OPDISTTERM [NONE / ONLY]
    Controls use of the out-of-plane distance potential energy term. In the absence of a modifying option, this keyword turns on use of the potential. The NONE option turns off use of this potential energy term. The ONLY option turns off all potential energy terms except for this one.
 
 .. index:: OPDISTUNIT
@@ -1393,6 +1500,8 @@ OPDISTUNIT [real]
 
 OPENMP-THREADS [integer]
    Sets the number of threads to be used in OpenMP parallelization of certain Tinker calculations. The default in the absence of the OPENMP-THREADS keyword is to set the number of threads equal to the total number of CPU cores found for the computer being used.
+
+.. index:: OPT-COEFF
 
 OPT-COEFF
 
@@ -1406,19 +1515,31 @@ OVERWRITE
 PARAMETERS [file name]
    Provides the name of the force field parameter file to be used for the current Tinker calculation. The standard file name extension for parameter files, .prm, is an optional part of the file name modifier. The default in the absence of the PARAMETERS keyword is to look for a parameter file with the same base name as the molecular system and ending in the .prm extension. If a valid parameter file is not found, the user will asked to provide a file name interactively.
 
+.. index:: PCG-GUESS
+
 PCG-GUESS
+
+.. index:: PCG-NOGUESS
 
 PCG-NOGUESS
 
+.. index:: PCG-NOPRECOND
+
 PCG-NOPRECOND
+
+.. index:: PCG-PEEK
 
 PCG-PEEK
 
+.. index:: PCG-PRECOND
+
 PCG-PRECOND
+
+.. index:: PENETRATION
 
 PENETRATION
 
-.. index:: PENETRATION
+.. index:: PEWALD-ALPHA
 
 PEWALD-ALPHA [real]   Sets the value of the Ewald coefficient which controls the width of the Gaussian screening charges during particle mesh Ewald summation for polarization interactions. In the absence of the PEWALD-ALPHA keyword, the EWALD-ALPHA is used, or a value is chosen which causes interactions outside the real-space cutoff to be below a fixed tolerance. For most standard applications of polarization Ewald summation, the program default should be used.
 
@@ -1454,7 +1575,7 @@ PITORS [2 integers & 1 real]
 
 .. index:: PITORSTERM
 
-PITORSTERM [NONE/ONLY]
+PITORSTERM [NONE / ONLY]
    Controls use of the pi-orbital torsional angle potential energy term. In the absence of a modifying option, this keyword turns on use of the potential. The NONE option turns off use of this potential energy term. The ONLY option turns off all potential energy terms except for this one.
 
 .. index:: PITORSUNIT
@@ -1524,24 +1645,26 @@ POLAR-ITER
 
 .. index:: POLAR-PREDICT
 
-POLAR-PREDICT [ASPC/GEAR/LSQR]
+POLAR-PREDICT [ASPC / GEAR / LSQR]
    Turns on use of an induced dipole prediction method to accelerate convergence of self-consistent induced dipoles. The Always Stable Predictor-Corrector (ASPC) method, a standard Gear extrapolation method (GEAR), and extrapolation based on a least squared prediction (LSQR) are available as modifiers to the keyword. The default value if the keyword is used without a modifier is ASPC. Use of POLAR-PREDICT biases the early stages of induced dipole convergence, and should only be used when requesting tight convergence of 0.00001 or less via POLAR-EPS.
+
+.. index:: POLARIZABLE
 
 POLARIZABLE
 
 .. index:: POLARIZATION
 
-POLARIZATION [DIRECT/MUTUAL]
+POLARIZATION [DIRECT / MUTUAL]
    Selects between the use of direct and mutual dipole polarization for force fields that incorporate the polarization term. The DIRECT modifier avoids an iterative calculation by using only the permanent electric field in computation of induced dipoles. The MUTUAL option, which is the default in the absence of the POLARIZATION keyword, iterates the induced dipoles to self-consistency.
 
 .. index:: POLARIZE
 
-POLARIZE [1 integer, 1 real & up to 4 integers]
-   Provides the values for a single atomic dipole polarizability parameter. The integer modifier, if positive, gives the atom type number for which a polarizability parameter is to be defined. If the first integer modifier is negative, then the parameter value to follow applies only to the individual atom whose atom number is the negative of the modifier. The real number modifier gives the value of the dipole polarizability in Ang^3. The final integer modifiers list the atom type numbers of atoms directly bonded to the current atom and which will be considered to be part of the current atom's polarization group.
+POLARIZE [1 integer, up to 3 reals & up to 8 integers]
+   Provides the values for a single atomic dipole polarizability parameter. The initial integer modifier, if positive, gives the atom type number for which a polarizability parameter is to be defined. If the first integer modifier is negative, then the parameter value to follow applies only to the specific atom whose atom number is the negative of the modifier. The first real number modifier gives the value of the dipole polarizability in Ang^3. The second real number modifier, if present, gives the Thole damping value. A Thole value of zero implies undamped polarization. If this modifier is not present, then charge penetration values will be used for polarization damping, as in the HIPPO polarization model. The third real modifier, if present, gives a direct field damping value only used with the AMOEBA+ polarization model. The remaining integer modifiers list the atom type numbers of atoms directly bonded to the current atom and which will be considered to be part of the current atom's polarization group. If the parameter is for a specific atom, then the integers defining the polarization group are ignored.
 
 .. index:: POLARIZETERM
 
-POLARIZETERM [NONE/ONLY]
+POLARIZETERM [NONE / ONLY]
    Controls use of the atomic dipole polarization potential energy term. In the absence of a modifying option, this keyword turns on use of the potential. The NONE option turns off use of this potential energy term. The ONLY option turns off all potential energy terms except for this one.
 
 .. index:: POLYMER-CUTOFF
@@ -1549,17 +1672,35 @@ POLARIZETERM [NONE/ONLY]
 POLYMER-CUTOFF [real]
    Sets the value of an additional cutoff parameter needed for infinite polymer systems. This value must be set to less than half the minimal periodic box dimension and should be greater than the largest possible interatomic distance that can be subject to scaling or exclusion as a local electrostatic or van der Waals interaction. The default in the absence of the POLYMER-CUTOFF keyword is 5.5 Angstroms.
 
-POTENTIAL-ATOMS
+.. index:: POTENTIAL-ATOMS
 
-POTENTIAL-FACTOR
+POTENTIAL-ATOMS [integer list]
+   Sets the list of atoms whose grid points will be included in electrostatic potential calculations and fitting. A grid point is considered to belong to the atom to which it is closest. Multiple POTENTIAL-ATOMS lines can be present in the keyfile and are treated cumulatively. In the absence of POTENTIAL-ATOMS keywords, all grid points are used.
 
-POTENTIAL-FIT
+.. index:: POTENTIAL-FACTOR
 
-POTENTIAL-OFFSET
+POTENTIAL-FACTOR [real]
+   Provides a multiplicative scaling value to be applied to the van der Waals radii of atoms prior to construction of the electrostatic potential grid surrounding a target system. The default value used in the absence of the POTENTIAL-FACTOR keyword is 1.0.
 
-POTENTIAL-SHELLS
+.. index:: POTENTIAL-FIT
 
-POTENTIAL-SPACING
+POTENTIAL-FIT [integer list]
+   Sets the list of atoms whose partial charge or atomic multipole parameters will be allowed to vary during electrostatic potential fitting. Multiple POTENTIAL-FIT lines can be present in the keyfile and are treated cumulatively. In the absence of POTENTIAL-FIT keywords, all atoms are used during the fitting procedure.
+
+.. index:: POTENTIAL-OFFSET
+
+POTENTIAL-OFFSET [real]
+   Provides an additive offset value in Angstroms to be applied to the van der Waals radii of atoms prior to construction of the electrostatic potential grid surrounding a target system. The default value used in the absence of the POTENTIAL-OFFSET keyword is 1.0, meaning that the closest shell of grid points will lie 1.0 Angstroms outside of the vdW radii.
+
+.. index:: POTENTIAL-SHELLS
+
+POTENTIAL-SHELLS [integer[
+   Sets the number of radial shells of grid points used in the electrostatic potential grid surrounding a target system. A default value of 4 is used in the absence of the POTENTIAL-SHELLS keyword.
+
+.. index:: POTENTIAL-SPACING
+
+POTENTIAL-SPACING [real]
+   Sets the spacing in Angstroms for construction of the electrostatic potential grid, including both the distance between shells of grid points and the average point-to-point distance within a shell. The default value in the absence of the POTENTIAL-SPACING keyword is 0.35 Angstroms.
 
 .. index:: PPME-ORDER
 
@@ -1578,12 +1719,12 @@ RADIUSRULE [ARITHMETIC/GEOMETRIC/CUBIC-MEAN]
 
 .. index:: RADIUSSIZE
 
-RADIUSSIZE [RADIUS/DIAMETER]
+RADIUSSIZE [RADIUS / DIAMETER]
    Determines whether the atom size values given in van der Waals parameters read from VDW keyword statements are interpreted as atomic radius or diameter values. The default in the absence of the RADIUSSIZE keyword is to assume that vdw size parameters are given as radius values.
 
 .. index:: RADIUSTYPE
 
-RADIUSTYPE [R-MIN/SIGMA]
+RADIUSTYPE [R-MIN / SIGMA]
    Determines whether atom size values given in van der Waals parameters read from VDW keyword statements are interpreted as potential minimum (Rmin) or LJ-style sigma values. The default in the absence of the RADIUSTYPE keyword is to assume that vdw size parameters are given as Rmin values.
 
 .. index:: RANDOMSEED
@@ -1593,7 +1734,7 @@ RANDOMSEED [integer]
   
 .. index:: RATTLE
 
-RATTLE [BONDS/ANGLES/DIATOMIC/TRIATOMIC/WATER]
+RATTLE [BONDS / ANGLES / DIATOMIC / TRIATOMIC / WATER]
    Invokes the rattle algorithm, a velocity version of shake, on portions of a molecular system during a molecular dynamic calculation. The RATTLE keyword can be followed by any of the modifiers shown, in which case all occurrences of the modifier species are constrained at ideal values taken from the bond and angle parameters of the force field in use. In the absence of any modifier, RATTLE constrains all bonds to hydrogen atoms at ideal bond lengths.
   
 .. index:: RATTLE-DISTANCE
@@ -1601,11 +1742,19 @@ RATTLE [BONDS/ANGLES/DIATOMIC/TRIATOMIC/WATER]
 RATTLE-DISTANCE [2 integers]
    Allows the use of a holonomic constraint between the two atoms whose numbers are specified on the keyword line. If the two atoms are involved in a covalent bond, then their distance is constrained to the ideal bond length from the force field. For nonbonded atoms, the rattle constraint is fixed at their distance in the input coordinate file.
 
+.. index:: RATTLE-EPS
+
 RATTLE-EPS
+
+.. index:: RATTLE-LINE
 
 RATTLE-LINE [integer]
 
+.. index:: RATTLE-ORIGIN
+
 RATTLE-ORIGIN [integer]
+
+.. index:: RATTLE-PLANE
 
 RATTLE-PLANE [integer]
   
@@ -1623,15 +1772,27 @@ REDUCE [real]
 
 REMOVE-INERTIA [integer]
    Specifies the number of molecular dynamics steps between removal of overall tranlational and/or rotational motion of the system. The default value in the absence of the REMOVE-INERTIA keyword is 100 steps.
-
-REP-12-SCALE
-
-REP-13-SCALE
-
-REP-14-SCALE
-
-REP-15-SCALE
   
+.. index:: REP-12-SCALE
+
+REP-12-SCALE [real]
+   Provides a multiplicative scale factor that is applied to Pauli repulsion interactions between 1-2 connected atoms, i.e., atoms that are directly bonded. The default value of 0.0 is used to omit 1-2 interactions, if the REP-12-SCALE keyword is not given in either the parameter file or the keyfile.
+  
+.. index:: REP-13-SCALE
+
+REP-13-SCALE [real]
+   Provides a multiplicative scale factor that is applied to Pauli repulsion interactions between 1-3 connected atoms, i.e., atoms separated by two covalent bonds. The default value of 0.0 is used to omit 1-3 interactions, if the REP-13-SCALE keyword is not given in either the parameter file or the keyfile.
+
+.. index:: REP-14-SCALE
+
+REP-14-SCALE [real]
+   Provides a multiplicative scale factor that is applied to Pauli repulsion interactions between 1-4 connected atoms, i.e., atoms separated by three covalent bonds. The default value of 1.0 is used, if the REP-14-SCALE keyword is not given in either the parameter file or the keyfile.
+
+.. index:: REP-15-SCALE
+
+REP-15-SCALE [real]
+   Provides a multiplicative scale factor that is applied to Pauli repulsion interactions between 1-5 connected atoms, i.e., atoms separated by three covalent bonds. The default value of 1.0 is used, if the REP-15-SCALE keyword is not given in either the parameter file or the keyfile.
+
 .. index:: REPULS-CUTOFF
 
 REPULS-CUTOFF [real]
@@ -1642,19 +1803,29 @@ REPULS-CUTOFF [real]
 REPULS-TAPER [real]
    Modifies the cutoff window for Pauli repulsion energy interactions. It is similar in form and action to the TAPER keyword, except that its value applies only to the Pauli repulsion potential. The default value in the absence of the REPULS-TAPER keyword is to begin the cutoff window at 0.9 of the corresponding cutoff distance.
 
+.. index:: REPULSION
+
 REPULSION
   
 .. index:: REPULSIONTERM
 
-REPULSIONTERM [NONE/ONLY]
+REPULSIONTERM [NONE / ONLY]
    Controls use of the Pauli repulsion potential energy term. In the absence of a modifying option, this keyword turns on use of the potential. The NONE option turns off use of this potential energy term. The ONLY option turns off all potential energy terms except for this one.
 
-RESP-WEIGHT
+.. index:: RESP-WEIGHT
 
-RESPA-INNER
+RESP-WEIGHT [real]
+   Provides a weight value for the restraint of partial charge and atomic multipole values during electrostatic potential fitting. A value of 1.0 or larger gives a relatively strong restraint, while a value of zero corresponds to no restraint. The actual weight applied is multiplicative, and proportional to the square root of this keyword values. The default value in the absence of the RESP-WEIGHT keyword is to use a value of 1.0.
 
-RESPTYPE
-  
+.. index:: RESPA-INNER
+
+RESPA-INNER [real]
+
+.. index:: RESPTYPE
+
+RESPTYPE [ORIG / ZERO / NONE]
+   Provides the reference values for restraint of electrostatic parameters during potential fitting. ORIG restrains the partial charges and atomic multipoles to their original values at the beginning of the fitting procedure. ZERO restrains all electrostatic parameters to a value of zero, in order to fit a model with the smallest reasonable parameter values. NONE removes the restraint entirely. The default value in the absence of the RESPTYPE keyword is to restrain the potential fit parameters to their original input values, i.e., to use ORIG.
+
 .. index:: RESTRAIN-ANGLE
 
 RESTRAIN-ANGLE [3 integers & 3 reals]
@@ -1672,15 +1843,13 @@ RESTRAIN-GROUPS [2 integers & 3 reals]
   
 .. index:: RESTRAIN-PLANE
 
-RESTRAIN-PLANE [X/Y/Z, 1 integer & 3 reals]
+RESTRAIN-PLANE [X / Y / Z, 1 integer & 3 reals]
    Provides the ability to restrain an individual atom to a specified plane orthogonal to a coordinate axis. The first modifier gives the axis (X, Y or Z) perpendicular to the restraint plane. The integer modifier contains the atom number of the atom to be restrained. The first real number modifier gives the coordinate value to which the atom is restrained along the specified axis. The second real modifier sets the force constant in kcal/Ang^2 for the harmonic restraint potential. The final real modifier defines a range above and below the specified plane within which the restraint value is zero. If the force constant is omitted, a default value of 100.0 is used. If the exclusion range is omitted, it is taken to be zero.
   
 .. index:: RESTRAIN-POSITION
 
 RESTRAIN-POSITION [1 integer & 5 reals, OR 2 integers & 2 reals]
-   Provides the ability to restrain an atom or group of atoms to specified coordinate positions. An initial positive integer modifier contains the atom number of the atom to be restrained. The first three real number modifiers give the X-, Y- and Z-coordinates to which the atom is tethered. The fourth real modifier sets the force constant in kcal/Ang^2 for the harmonic restraint potential. The final real modifier defines a sphere around the specified coordinates within which the restraint value is zero. If the coordinates are omitted, then the atom is restrained to the origin. If the force constant is omitted, a default value of 100.0 is used. If the exclusion sphere radius is omitted, it is taken to be zero.
-
-Alternatively, if the initial integer modifier is negative, then a second integer is read, followed by two real number modifiers. All atoms in the range from the absolute value of the first integer through the second integer are restrained to their current coordinates. The first real modifier is the harmonic force constant in kcal/Ang^2, and the second real defines a sphere around each atom within which the restraint value is zero. If the force constant is omitted, a default value of 100.0 is used. If the exclusion sphere radius is omitted, it is taken to be zero.
+   Provides the ability to restrain an atom or group of atoms to specified coordinate positions. An initial positive integer modifier contains the atom number of the atom to be restrained. The first three real number modifiers give the X-, Y- and Z-coordinates to which the atom is tethered. The fourth real modifier sets the force constant in kcal/Ang^2 for the harmonic restraint potential. The final real modifier defines a sphere around the specified coordinates within which the restraint value is zero. If the coordinates are omitted, then the atom is restrained to the origin. If the force constant is omitted, a default value of 100.0 is used. If the exclusion sphere radius is omitted, it is taken to be zero. Alternatively, if the initial integer modifier is negative, then a second integer is read, followed by two real number modifiers. All atoms in the range from the absolute value of the first integer through the second integer are restrained to their current coordinates. The first real modifier is the harmonic force constant in kcal/Ang^2, and the second real defines a sphere around each atom within which the restraint value is zero. If the force constant is omitted, a default value of 100.0 is used. If the exclusion sphere radius is omitted, it is taken to be zero.
   
 .. index:: RESTRAIN-TORSION
 
@@ -1689,14 +1858,16 @@ RESTRAIN-TORSION [4 integers & 3 reals]
   
 .. index:: RESTRAINTERM
 
-RESTRAINTERM [NONE/ONLY]
+RESTRAINTERM [NONE / ONLY]
    Controls use of the restraint potential energy terms. In the absence of a modifying option, this keyword turns on use of these potentials. The NONE option turns off use of these potential energy terms. The ONLY option turns off all potential energy terms except for these terms.
+
+.. index:: ROTATABLE-BOND
 
 ROTATABLE-BOND
    
 .. index:: RXNFIELDTERM
 
-RXNFIELDTERM [NONE/ONLY]
+RXNFIELDTERM [NONE / ONLY]
    Controls use of the reaction field continuum solvation potential energy term. In the absence of a modifying option, this keyword turns on use of the potential. The NONE option turns off use of this potential energy term. The ONLY option turns off all potential energy terms except for this one.
   
 .. index:: SADDLEPOINT
@@ -1736,18 +1907,20 @@ SLOPEMAX [real]
   
 .. index:: SMOOTHING
 
-SMOOTHING [DEM/GDA/TOPHAT/STOPHAT]
-   Activates the potential energy smoothing methods. Several variations are available depending on the value of the modifier used: DEM= Diffusion Equation Method with a standard Gaussian kernel; GDA= Gaussian Density Annealing as proposed by the Straub group; TOPHAT= a local DEM-like method using a finite range "tophat" kernel; STOPHAT= shifted tophat smoothing.
+SMOOTHING [DEM / GDA / TOPHAT / STOPHAT]
+   Activates use of potential energy smoothing methods. Several variations are available depending on the value of the modifier used: DEM= Diffusion Equation Method with a standard Gaussian kernel; GDA= Gaussian Density Annealing as proposed by the Straub group; TOPHAT= a local DEM-like method using a finite range "tophat" kernel; STOPHAT= shifted tophat smoothing.
   
 .. index:: SOLVATE
 
-SOLVATE [ASP/SASA/ONION/STILL/HCT/OCB/ACE/GB/GB-HPMF/GK/GK-HMPF/PB/PB-HMPF]
+SOLVATE [ASP / SASA / ONION / STILL / HCT / OCB / ACE / GB / GB-HPMF / GK / GK-HMPF / PB / PB-HMPF]
    Turns on a continuum solvation free energy term during energy calculations when used with standard force fields. Several algorithms are available based on the modifier used: ASP is the Eisenberg-McLachlan ASP method using the Wesson-Eisenberg vacuum-to-water parameters, SASA is the Ooi-Scheraga SASA method, ONION is the original 1990 Still "Onion-shell" GB/SA method, STILL is the 1997 analytical GB/SA method from Still's group, HCT is the pairwise descreening method of Hawkins, Cramer and Truhlar, OBC is the Onufriev-Bashford-Case method, ACE is the Analytical Continuum Electrostatics method from Karplus' group, GB is equivalent to the STILL modifier, GK is the Generalized Kirkwood method for polarizable multipoles, and PB is a Poisson-Boltzmann method using APBS. The HPMF versions use Head-Gordon's Hydrophobic Potential of Mean Force method as the non-electrostatic component.
   
 .. index:: SOLVATETERM
 
-SOLVATETERM [NONE/ONLY]
+SOLVATETERM [NONE / ONLY]
    Controls use of the macroscopic solvation potential energy term. In the absence of a modifying option, this keyword turns on use of the potential. The NONE option turns off use of this potential energy term. The ONLY option turns off all potential energy terms except for this one.
+
+.. index:: SOLVENT-PRESSURE
 
 SOLVENT-PRESSURE
   
@@ -1778,7 +1951,7 @@ STRBND [3 integers & 2 reals]
   
 .. index:: STRBNDTERM
 
-STRBNDTERM [NONE/ONLY]
+STRBNDTERM [NONE / ONLY]
    Controls use of the bond stretching-angle bending cross term potential energy. In the absence of a modifying option, this keyword turns on use of the potential. The NONE option turns off use of this potential energy term. The ONLY option turns off all potential energy terms except for this one.
   
 .. index:: STRBNDUNIT
@@ -1793,13 +1966,15 @@ STRTORS [2 integers & 1 real]
   
 .. index:: STRTORSTERM
 
-STRTORTERM [NONE/ONLY]
+STRTORTERM [NONE / ONLY]
    Controls use of the bond stretching-torsional angle cross term potential energy. In the absence of a modifying option, this keyword turns on use of the potential. The NONE option turns off use of this potential energy term. The ONLY option turns off all potential energy terms except for this one.
   
 .. index:: STRTORSUNIT
 
 STRTORUNIT [real]
    Sets the scale factor needed to convert the energy value computed by the bond stretching-torsional angle cross term potential into units of kcal/mole. The correct value is force field dependent and typically provided in the header of the master force field parameter file. The default value of 1.0 is used, if the STRTORUNIT keyword is not given in the force field parameter file or the keyfile.
+
+.. index:: SURFACE-TENSION
 
 SURFACE-TENSION
   
@@ -1808,7 +1983,11 @@ SURFACE-TENSION
 TAPER [real]
    Allows modification of the cutoff windows for nonbonded potential energy interactions. The nonbonded terms are smoothly reduced from their standard value at the beginning of the cutoff window to zero at the far end of the window. The far end of the window is specified via the CUTOFF keyword or its potential function specific variants. The modifier value supplied with the TAPER keyword sets the beginning of the cutoff window. The modifier can be given either as an absolute distance value in Angstroms, or as a fraction between zero and one of the CUTOFF distance. The default value in the absence of the TAPER keyword ranges from 0.65 to 0.9 of the CUTOFF distance depending on the type of potential function. The windows are implemented via polynomial-based switching functions, in some cases combined with energy shifting.
 
+.. index:: TARGET-DIPOLE
+
 TARGET-DIPOLE
+
+.. index:: TARGET-QUADRUPOLE
 
 TARGET-QUADRUPOLE
   
@@ -1822,15 +2001,21 @@ TAU-PRESSURE [real]
 TAU-TEMPERATURE [real]
    Sets the coupling time in picoseconds for the Groningen-style temperature bath coupling used to control the system temperature during molecular dynamics calculations. A default value of 0.1 is used for TAU-TEMPERATURE in the absence of the keyword.
 
+.. index:: TCG-GUESS
+
 TCG-GUESS
 
+.. index:: TCG-NOGUESS
+
 TCG-NOGUESS
+
+.. index:: TCG-PEEK
 
 TCG-PEEK
   
 .. index:: THERMOSTAT
 
-THERMOSTAT [BUSSI/BERENDSEN/ANDERSEN/NOSE-HOOVER]
+THERMOSTAT [BUSSI / BERENDSEN / ANDERSEN / NOSE-HOOVER]
    Selects a thermostat algorithm for use during molecular dynamics. Four modifiers are available: BUSSI is a Bussi-Parrinello stochastic coupling method, BERENSDEN is the original Berendsen bath coupling method, ANDERSEN is the Andersen stochastic collision method, and NOSE-HOOVER is a Nose-Hoover extended variable chain method. The default in the absence of the THERMOSTAT keyword is to use the BUSSI method.
   
 .. index:: TORS-LAMBDA
@@ -1855,7 +2040,7 @@ TORSION5 [4 integers & up to 6 real/real/integer triples]
   
 .. index:: TORSIONTERM
 
-TORSIONTERM [NONE/ONLY]
+TORSIONTERM [NONE / ONLY]
    Controls use of the torsional angle potential energy term. In the absence of a modifying option, this keyword turns on use of the potential. The NONE option turns off use of this potential energy term. The ONLY option turns off all potential energy terms except for this one.
   
 .. index:: TORSIONUNIT
@@ -1870,7 +2055,7 @@ TORTORS [7 integers, then multiple lines of 2 integers and 1 real]
   
 .. index:: TORTORTERM
 
-TORTORTERM [NONE/ONLY]
+TORTORTERM [NONE / ONLY]
    Controls use of the torsion-torsion potential energy term. In the absence of a modifying option, this keyword turns on use of the potential. The NONE option turns off use of this potential energy term. The ONLY option turns off all potential energy terms except for this one.
   
 .. index:: TORTORUNIT
@@ -1880,7 +2065,7 @@ TORTORUNIT [real]
   
 .. index:: TRIAL-DISTANCE
 
-TRIAL-DISTANCE [CLASSIC/RANDOM/TRICOR/HAVEL integer/PAIRWISE integer]
+TRIAL-DISTANCE [CLASSIC / RANDOM / TRICOR / HAVEL integer / PAIRWISE integer]
    Sets the method for selection of a trial distance matrix during distance geometry computations. The keyword takes a modifier that selects the method to be used. The HAVEL and PAIRWISE modifiers also require an additional integer value that specifies the number of atoms used in metrization and the percentage of metrization, respectively. The default in the absence of this keyword is to use the PAIRWISE method with 100 percent metrization. Further information on the various methods is given with the description of the Tinker distance geometry program.
   
 .. index:: TRIAL-DISTRIBUTION
@@ -1910,7 +2095,7 @@ UREYBRAD [3 integers & 2 reals]
   
 .. index:: UREYTERM
 
-UREYTERM [NONE/ONLY]
+UREYTERM [NONE / ONLY]
    Controls use of the Urey-Bradley potential energy term. In the absence of a modifying option, this keyword turns on use of the potential. The NONE option turns off use of this potential energy term. The ONLY option turns off all potential energy terms except for this one.
   
 .. index:: UREYUNIT
@@ -1941,12 +2126,12 @@ VDW [1 integer & 3 reals]
 .. index:: VDW-12-SCALE
 
 VDW-12-SCALE [real]
-   Provides a multiplicative scale factor that is applied to van der Waals potential interactions between 1-2 connected atoms, i.e., atoms that are directly bonded. The default value of 0.0 is used, if the VDW-12-SCALE keyword is not given in either the parameter file or the keyfile.
+   Provides a multiplicative scale factor that is applied to van der Waals potential interactions between 1-2 connected atoms, i.e., atoms that are directly bonded. The default value of 0.0 is used to omit 1-2 interactions, if the VDW-12-SCALE keyword is not given in either the parameter file or the keyfile.
   
 .. index:: VDW-13-SCALE
 
 VDW-13-SCALE [real]
-   Provides a multiplicative scale factor that is applied to van der Waals potential interactions between 1-3 connected atoms, i.e., atoms separated by two covalent bonds. The default value of 0.0 is used, if the VDW-13-SCALE keyword is not given in either the parameter file or the keyfile.
+   Provides a multiplicative scale factor that is applied to van der Waals potential interactions between 1-3 connected atoms, i.e., atoms separated by two covalent bonds. The default value of 0.0 is used to omit 1-3 interactions, if the VDW-13-SCALE keyword is not given in either the parameter file or the keyfile.
   
 .. index:: VDW-14-SCALE
 
@@ -1993,6 +2178,8 @@ VDW-TAPER [real]
 VDW14 [1 integer & 2 reals]
    Provides values for a single van der Waals parameter for use in 1-4 nonbonded interactions. The integer modifier, if positive, gives the atom class number for which vdw parameters are to be defined. Note that vdw parameters are given for atom classes, not atom types. The two real number modifiers give the values of the atom size in Angstroms and the homoatomic well depth in kcal/mole. Reduction factors, if used, are carried over from the VDW keyword for the same atom class.
 
+.. index:: VDWINDEX
+
 VDWINDEX
   
 .. index:: VDWPR
@@ -2002,12 +2189,12 @@ VDWPR [2 integers & 2 reals]
   
 .. index:: VDWTERM
 
-VDWTERM [NONE/ONLY]
+VDWTERM [NONE / ONLY]
    Controls use of the van der Waals repulsion-dispersion potential energy term. In the absence of a modifying option, this keyword turns on use of the potential. The NONE option turns off use of this potential energy term. The ONLY option turns off all potential energy terms except for this one.
   
 .. index:: VDWTYPE
 
-VDWTYPE [LENNARD-JONES/BUCKINGHAM/BUFFERED-14-7/MM3-HBOND/GAUSSIAN]
+VDWTYPE [LENNARD-JONES / BUCKINGHAM / BUFFERED-14-7 / MM3-HBOND / GAUSSIAN]
    Sets the functional form for the van der Waals potential energy term. The text modifier gives the name of the functional form to be used. The GAUSSIAN modifier value implements a two or four Gaussian fit to the corresponding Lennard-Jones function for use with potential energy smoothing schemes. The default in the absence of the VDWTYPE keyword is to use the standard two parameter Lennard-Jones function.
   
 .. index:: VERBOSE
@@ -2015,7 +2202,11 @@ VDWTYPE [LENNARD-JONES/BUCKINGHAM/BUFFERED-14-7/MM3-HBOND/GAUSSIAN]
 VERBOSE
    Turns on printing of secondary and informational output during a variety of Tinker computations; a subset of the more extensive output provided by the DEBUG keyword.
 
+.. index:: VIB-ROOTS
+
 VIB-ROOTS
+
+.. index:: VIB-TOLERANCE
 
 VIB-TOLERANCE
   
@@ -2026,7 +2217,7 @@ VOLUME-MOVE [real]
   
 .. index:: VOLUME-SCALE
 
-VOLUME-SCALE [MOLECULAR/ATOMIC]
+VOLUME-SCALE [MOLECULAR / ATOMIC]
    Specifies the type of coordinate scaling to be used when making trial periodic box volume size changes during use of a Monte Carlo barostat. The MOLECULAR modifier enforces rigid body translation of molecules based on center of mass, while the ATOMIC value treats all coordinates independently. The default in the absence of the VOLUME-SCALE keyword is to use MOLECULAR scaling.
   
 .. index:: VOLUME-TRIAL
@@ -2047,14 +2238,14 @@ WRITEOUT [integer]
 .. index:: X-AXIS
 
 X-AXIS [real]
-   Sets the value of the a-axis length for a crystal unit cell, or, equivalently, the X-axis length for a periodic box. The length value in Angstroms is listed after the keyword. Equivalent to the A-AXIS keyword.
+   Sets the value of the a-axis length for a crystal unit cell, or, equivalently, the X-axis length for a periodic box. The length value in Angstroms is provided following the keyword. Equivalent to the A-AXIS keyword.
 
 .. index:: Y-AXIS
 
 Y-AXIS [real]
-   Sets the value of the b-axis length for a crystal unit cell, or, equivalently, the Y-axis length for a periodic box. The length value in Angstroms is listed after the keyword. If the keyword is absent, the Y-axis length is set equal to the X-axis length. Equivalent to the B-AXIS keyword.
+   Sets the value of the b-axis length for a crystal unit cell, or, equivalently, the Y-axis length for a periodic box. The length value in Angstroms is provided following the keyword. If the keyword is absent, the Y-axis length is set equal to the X-axis length. Equivalent to the B-AXIS keyword.
 
 .. index:: Z-AXIS
 
 Z-AXIS [real]
-   Sets the value of the c-axis length for a crystal unit cell, or, equivalently, the Z-axis length for a periodic box. The length value in Angstroms is listed after the keyword. If the keyword is absent, the Z-axis length is set equal to the X-axis length. Equivalent to the C-AXIS keyword.
+   Sets the value of the c-axis length for a crystal unit cell, or, equivalently, the Z-axis length for a periodic box. The length value in Angstroms is provided following the keyword. If the keyword is absent, the Z-axis length is set equal to the X-axis length. Equivalent to the C-AXIS keyword.
