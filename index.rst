@@ -5,7 +5,7 @@ Tinker Manual
    :maxdepth: 2
    :caption: Contents
 
-   text/intro
+   text/intro/index
    text/install/index
    text/forcefield/index
    text/feature/index
