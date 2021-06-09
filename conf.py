@@ -80,6 +80,9 @@ latex_elements = {
 % \usepackage{fouriernc}
 \usepackage[defaultsans]{lato} % sans serif
 \usepackage{inconsolata}       % monospace
+\usepackage[none]{hyphenat}    % turn off hyphenation
+\usepackage{enumitem}
+\setlist[description]{style=unboxed} % long description list
 
 \usepackage[normalem]{ulem} % strikethrough text: \sout{text}
 
