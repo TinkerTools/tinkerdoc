@@ -3,5 +3,5 @@ Features & Methods
 
 .. toctree::
 
-   accelerateAMOEBA
    integrator
+   accelerateAMOEBA
