@@ -6,12 +6,12 @@ Citations
 How to Cite Tinker
 ------------------
 
-Any published work which utilizes Tinker shall give appropriate acknowledgement to the Tinker 8 developer community's contribution by including `Tinker 8`_.
+Any published work which utilizes Tinker shall give appropriate acknowledgement to the Tinker8 developer community's contribution by including Tinker8_.
 
 How to Cite Tinker9
 -------------------
 
-In addition to the main Tinker reference `Tinker 8`_, appropriate acknowledgement to the Tinker9 developer community's contribution by including Tinker9_.
+In addition to the main Tinker reference `Tinker8`_, appropriate acknowledgement to the Tinker9 developer community's contribution by including Tinker9_.
 
 Download Citation Files
 -----------------------
@@ -19,17 +19,17 @@ Download Citation Files
 .. list-table::
    :header-rows: 1
 
-   * - Description
+   * - Software
      - BibTex
      - RIS
-   * - `Tinker 8`_
+   * - Tinker8_
      - :raw-html:`<input type="image" onclick="t8_dl_bibtex()" src="https://img.shields.io/badge/Tinker8-BibTex-brightgreen">`
      - :raw-html:`<input type="image" onclick="t8_dl_ris()" src="https://img.shields.io/badge/Tinker8-RIS-blue">`
    * - Tinker9_
      - :raw-html:`<input type="image" onclick="t9_dl_github_bibtex()" src="https://img.shields.io/badge/Tinker9-BibTex-brightgreen">`
      - :raw-html:`<input type="image" onclick="t9_dl_github_ris()" src="https://img.shields.io/badge/Tinker9-RIS-blue">`
 
-.. _Tinker 8:
+.. _Tinker8:
 
    Tinker 8: Software Tools for Molecular Design.
    Joshua A. Rackers, Zhi Wang, Chao Lu, Marie L. Laury, Louis Lagardère,
@@ -40,5 +40,5 @@ Download Citation Files
 .. _Tinker9:
 
    Tinker9: Next Generation of Tinker with GPU Support.
-   Zhi Wang and Jay W. Ponder, 2021,
+   Zhi Wang, Washington University in St. Louis, 2021,
    https://github.com/TinkerTools/tinker9.

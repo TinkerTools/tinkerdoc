@@ -36,23 +36,22 @@ function t9_accessed_ris()
 // Tinker9 on GitHub: bib
 
 const t9_github_bib = `@misc {Tinker9_GitHub,
-author = {Wang, Zhi and Ponder, Jay W.},
+author = {Wang, Zhi},
 title = {{Tinker9: Next Generation of Tinker with GPU Support}},
 shorttitle = {{Tinker9}},
 year = {2021},
 url = {https://github.com/TinkerTools/tinker9},
-note = {accessed: T9_ACCESSED}
+note = {{Washington University in St. Louis}, accessed: T9_ACCESSED}
 }`;
 
-const t9_github_ris = `TY  - ELEC
+const t9_github_ris = `TY  - COMP
 TI  - Next Generation of Tinker with GPU Support
 AU  - Wang, Zhi
-AU  - Ponder, Jay W.
-DA  - 2021///
 PY  - 2021
 Y2  - T9_ACCESSED
 ST  - Tinker9
 UR  - https://github.com/TinkerTools/tinker9
+PB  - Washington University in St. Louis
 ER  -
 `;
 
@@ -74,7 +73,7 @@ function t9_dl_github_ris()
 const t8_paper_bib = `@article {Tinker8_Paper,
 title = {{Tinker 8: Software Tools for Molecular Design}},
 volume = {14},
-issn = {1549-9618, 1549-9626},
+issn = {1549-9618},
 shorttitle = {{Tinker 8}},
 doi = {10.1021/acs.jctc.8b00529},
 number = {10},
@@ -86,27 +85,27 @@ pages = {5273-5289},
 }`;
 
 const t8_paper_ris = `TY  - JOUR
-TI  - Tinker 8: Software Tools for Molecular Design
-AU  - Rackers, Joshua A.
-AU  - Wang, Zhi
-AU  - Lu, Chao
-AU  - Laury, Marie L.
-AU  - Lagardère, Louis
-AU  - Schnieders, Michael J.
-AU  - Piquemal, Jean-Philip
-AU  - Ren, Pengyu
-AU  - Ponder, Jay W.
-T2  - Journal of Chemical Theory and Computation
-DA  - 2018/10/09/
+T1  - Tinker 8: Software Tools for Molecular Design
+A1  - Rackers, Joshua A.
+A1  - Wang, Zhi
+A1  - Lu, Chao
+A1  - Laury, Marie L.
+A1  - Lagardère, Louis
+A1  - Schnieders, Michael J.
+A1  - Piquemal, Jean-Philip
+A1  - Ren, Pengyu
+A1  - Ponder, Jay W.
+JF  - Journal of Chemical Theory and Computation
+Y1  - 2018/10/09/
 PY  - 2018
 DO  - 10.1021/acs.jctc.8b00529
 VL  - 14
 IS  - 10
 SP  - 5273
 EP  - 5289
-J2  - J. Chem. Theory Comput.
+JO  - J. Chem. Theory Comput.
 LA  - en
-SN  - 1549-9618, 1549-9626
+SN  - 1549-9618
 ST  - Tinker 8
 UR  - https://pubs.acs.org/doi/10.1021/acs.jctc.8b00529
 ER  -
