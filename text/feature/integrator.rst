@@ -58,10 +58,10 @@ Integrators
 
 Integrators that need documentation are:
 
-   - BAOAB
-   - GHMC
-   - STOCHASTIC
-   - RIGIDBODY
+- BAOAB
+- GHMC
+- STOCHASTIC
+- RIGIDBODY
 
 .. toctree::
 
