@@ -17,8 +17,6 @@ Tinker9 implements the Langevin Piston integrator in two ways: a single time-ste
    barostat     langevin
    integrator      respa
 
-
-
 .. seealso::
 
    - Relavent keywords
