@@ -1,6 +1,8 @@
 Use of the Keyword Control File
 ===============================
 
+.. include:: ../replace.rst
+
 Using Keywords to Control Tinker Calculations
 ---------------------------------------------
 
@@ -767,8 +769,12 @@ B-EXPTERM [real]
 .. index:: BAROSTAT
 .. _KEY-BAROSTAT:
 
-BAROSTAT [BERENDSEN / BUSSI / NOSE-HOOVER / MONTECARLO]
-   Selects a barostat algorithm for use during molecular dynamics. At present the options include three virial-based methods, in addition to a Monte Carlo barostat. The default in the absence of the BAROSTAT keyword is to use the BERENDSEN algorithm.
+BAROSTAT [BERENDSEN / BUSSI / NOSE-HOOVER / MONTECARLO / LANGEVIN]
+   Selects a barostat algorithm for use during molecular dynamics. At present the options include several virial-based methods, in addition to a Monte Carlo barostat. The default in the absence of the BAROSTAT keyword is to use the BERENDSEN algorithm.
+
+   |doc8| BERENDSEN / BUSSI / NOSE-HOOVER / MONTECARLO
+
+   |doc9| BERENDSEN / NOSE-HOOVER / MONTECARLO / LANGEVIN
 
 .. index:: BASIN
 .. _KEY-BASIN:

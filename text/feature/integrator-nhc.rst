@@ -1,5 +1,5 @@
-Nosé–Hoover Chain Integrator
-============================
+Nosé–Hoover Chain Integrator (NPT)
+==================================
 
 .. include:: ../replace.rst
 
