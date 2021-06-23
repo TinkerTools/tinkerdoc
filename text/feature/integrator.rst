@@ -43,13 +43,13 @@ Integrators
    +----------------------+-------------------+---------------------+
    | Integrator           | Thermostat        | Barostat            |
    +======================+===================+=====================+
-   | - VERLET             | - ANDERSEN 8      | - BERENDSEN 8/9     |
-   | - RESPA              | - BERENDSEN 8     | - MONTECARLO 8/9    |
-   |                      | - BUSSI 8/9       |                     |
+   | - BEEMAN 8           | - ANDERSEN 8      | - BERENDSEN 8/9     |
+   | - VERLET 8/9         | - BERENDSEN 8     | - MONTECARLO 8/9    |
+   | - RESPA  8/9         | - BUSSI 8/9       |                     |
    |                      | - NOSE-HOOVER 8   |                     |
    +----------------------+-------------------+---------------------+
-   | - VERLET             | (Built-in)        | LANGEVIN 9          |
-   | - RESPA              |                   |                     |
+   | - VERLET 8/9         | (Built-in)        | LANGEVIN 9          |
+   | - RESPA  8/9         |                   |                     |
    +----------------------+-------------------+---------------------+
    | BUSSI 8              | (Built-in)        | (Built-in)          |
    +----------------------+-------------------+---------------------+
