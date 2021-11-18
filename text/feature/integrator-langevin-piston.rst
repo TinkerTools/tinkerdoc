@@ -26,6 +26,8 @@ Tinker9 implements the Langevin Piston integrator in two ways: a single time-ste
          Sets the value of the frictional coefficient in 1/ps for the Langevin dynamics of piston. The default is 20 in the absence of the keyword.
       - :ref:`VOLUME-TRIAL <KEY-VOLUME-TRIAL>` [integer]
          This keyword is borrowed from the Monte Carlo barostat to set the number of molecular dynamics steps between two changes in the periodic box size. The default is 1 step in the absence of the keyword.
+      - :ref:`PRINTOUT <KEY-PRINTOUT>` [integer]
+         Sets the number of box size changes between writes of the instantaneous pressure. The default value 0 will not print the instantaneous pressure.
    - Relavent keywords
       - :ref:`ANISO-PRESSURE <KEY-ANISO-PRESSURE>`
          Invokes anisotropic cell fluctuations.
