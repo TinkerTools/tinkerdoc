@@ -52,10 +52,10 @@ This implements the Langevin Piston integrator in two ways: a single time-step i
       - :ref:`VOLUME-TRIAL <KEY-VOLUME-TRIAL>` [integer]
          This keyword is borrowed from the Monte Carlo barostat to set the number of molecular dynamics steps between two changes in the periodic box size. The default is 1 step in the absence of the keyword.
       - :ref:`PRINTOUT <KEY-PRINTOUT>` [integer]
-         Sets the number of box size changes between writes of the instantaneous pressure. The default value 0 will not print the instantaneous pressure. **This feature is in development.**
+         Sets the number of MD steps between writes of the instantaneous pressure. The default value 0 will not print the instantaneous pressure. If the current MD step does not invoke the barostat, the instantaneous pressure will not be printed.
    - Relavent keywords
       - :ref:`ANISO-PRESSURE <KEY-ANISO-PRESSURE>`
-         Invokes anisotropic cell fluctuations. **This feature is being tested.**
+         Invokes anisotropic cell fluctuations.
       - `SEMIISO-PRESSURE`
          Invokes isotropic cell fluctuations in the xy-plane and independent fluctuation in the z-axis. **This feature is in development, and this new keyword will be documented.**
       - :ref:`INTEGRATOR <KEY-INTEGRATOR>` [VERLET / RESPA]
