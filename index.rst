@@ -20,7 +20,7 @@ Tinker Manual
 
       genindex
 
-   .. toctree::
-      :caption: Citations
+   .. .. toctree::
+   ..    :caption: Citations
 
-      text/cite
+   ..    text/cite
